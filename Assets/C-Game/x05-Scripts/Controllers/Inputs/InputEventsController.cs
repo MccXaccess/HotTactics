@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+using static UnityEngine.InputSystem.InputAction;
 
 public class InputEventsController : MonoBehaviour
 {
@@ -9,53 +12,62 @@ public class InputEventsController : MonoBehaviour
 
     private InputBindingsController input = null;
 
+    void UpdateKeyPressedSprint(CallbackContext ctx) => inputConfigs.KeyPressedSprint = ctx.ReadValueAsButton();
+    void UpdateKeyPressedDash(CallbackContext ctx) => inputConfigs.KeyPressedDash = ctx.ReadValueAsButton();
+    void UpdateKeyPressedCombatStance(CallbackContext ctx) => inputConfigs.KeyPressedCombatStance = ctx.ReadValueAsButton();
+    void UpdateKeyPressedShoot(CallbackContext ctx) => inputConfigs.KeyPressedShoot = ctx.ReadValueAsButton();
+    void UpdateKeyPressedInteraction(CallbackContext ctx) => inputConfigs.KeyPressedInteraction = ctx.ReadValueAsButton();
+    void UpdateKeyPressedReload(CallbackContext ctx) => inputConfigs.KeyPressedReload = ctx.ReadValueAsButton();
+    void UpdateMovementDirection(CallbackContext ctx) => characterConfigs.MovementDirection = ctx.ReadValue<Vector2>();
+    void ResetMovementDirection(CallbackContext ctx) => characterConfigs.MovementDirection = Vector2.zero;
+
     private void OnEnable()
     {
-        input.Character.Movement.performed += ctx => characterConfigs.MovementDirection = ctx.ReadValue<Vector2>();
-        input.Character.Movement.canceled += ctx => characterConfigs.MovementDirection = Vector2.zero;
+        input.Character.Movement.performed += UpdateMovementDirection;
+        input.Character.Movement.canceled += ResetMovementDirection;
 
-        input.Character.Sprint.performed += ctx => inputConfigs.KeyPressedSprint = ctx.ReadValueAsButton();
-        input.Character.Sprint.canceled += ctx => inputConfigs.KeyPressedSprint = ctx.ReadValueAsButton();
+        input.Character.Sprint.performed += UpdateKeyPressedSprint;
+        input.Character.Sprint.canceled += UpdateKeyPressedSprint;
 
-        input.Character.Dash.performed += ctx => inputConfigs.KeyPressedDash = ctx.ReadValueAsButton();
-        input.Character.Dash.canceled += ctx => inputConfigs.KeyPressedDash = ctx.ReadValueAsButton();
+        input.Character.Dash.performed += UpdateKeyPressedDash;
+        input.Character.Dash.canceled += UpdateKeyPressedDash;
 
-        input.Character.CombatStance.performed += ctx => inputConfigs.KeyPressedCombatStance = ctx.ReadValueAsButton();
-        input.Character.CombatStance.canceled += ctx => inputConfigs.KeyPressedCombatStance = ctx.ReadValueAsButton();
+        input.Character.CombatStance.performed += UpdateKeyPressedCombatStance;
+        input.Character.CombatStance.canceled += UpdateKeyPressedCombatStance;
 
-        input.Character.Shoot.performed += ctx => inputConfigs.KeyPressedShoot = ctx.ReadValueAsButton();
-        input.Character.Shoot.canceled += ctx => inputConfigs.KeyPressedShoot = ctx.ReadValueAsButton();
+        input.Character.Shoot.performed += UpdateKeyPressedShoot;
+        input.Character.Shoot.canceled += UpdateKeyPressedShoot;
 
-        input.Character.Interaction.performed += ctx => inputConfigs.KeyPressedInteraction = ctx.ReadValueAsButton();
-        input.Character.Interaction.canceled += ctx => inputConfigs.KeyPressedInteraction = ctx.ReadValueAsButton();
+        input.Character.Interaction.performed += UpdateKeyPressedInteraction;
+        input.Character.Interaction.canceled += UpdateKeyPressedInteraction;
 
-        input.Character.Reload.performed += ctx => inputConfigs.KeyPressedReload = ctx.ReadValueAsButton();
-        input.Character.Reload.canceled += ctx => inputConfigs.KeyPressedReload = ctx.ReadValueAsButton();
+        input.Character.Reload.performed += UpdateKeyPressedReload;
+        input.Character.Reload.canceled += UpdateKeyPressedReload;
         input.Enable();
     }
 
-    private void OnDisbale()
+    private void OnDisable()
     {
-        input.Character.Movement.performed -= ctx => characterConfigs.MovementDirection = ctx.ReadValue<Vector2>();
-        input.Character.Movement.canceled -= ctx => characterConfigs.MovementDirection = Vector2.zero;
+        input.Character.Movement.performed -= UpdateMovementDirection;
+        input.Character.Movement.canceled -= ResetMovementDirection;
 
-        input.Character.Sprint.performed -= ctx => inputConfigs.KeyPressedSprint = ctx.ReadValueAsButton();
-        input.Character.Sprint.canceled -= ctx => inputConfigs.KeyPressedSprint = ctx.ReadValueAsButton();
+        input.Character.Sprint.performed -= UpdateKeyPressedSprint;
+        input.Character.Sprint.canceled -= UpdateKeyPressedSprint;
 
-        input.Character.Dash.performed -= ctx => inputConfigs.KeyPressedDash = ctx.ReadValueAsButton();
-        input.Character.Dash.canceled -= ctx => inputConfigs.KeyPressedDash = ctx.ReadValueAsButton();
+        input.Character.Dash.performed -= UpdateKeyPressedDash;
+        input.Character.Dash.canceled -= UpdateKeyPressedDash;
 
-        input.Character.CombatStance.performed -= ctx => inputConfigs.KeyPressedCombatStance = ctx.ReadValueAsButton();
-        input.Character.CombatStance.canceled -= ctx => inputConfigs.KeyPressedCombatStance = ctx.ReadValueAsButton();
+        input.Character.CombatStance.performed -= UpdateKeyPressedCombatStance;
+        input.Character.CombatStance.canceled -= UpdateKeyPressedCombatStance;
 
-        input.Character.Shoot.performed -= ctx => inputConfigs.KeyPressedShoot = ctx.ReadValueAsButton();
-        input.Character.Shoot.canceled -= ctx => inputConfigs.KeyPressedShoot = ctx.ReadValueAsButton();
+        input.Character.Shoot.performed -= UpdateKeyPressedShoot;
+        input.Character.Shoot.canceled -= UpdateKeyPressedShoot;
 
-        input.Character.Interaction.performed -= ctx => inputConfigs.KeyPressedInteraction = ctx.ReadValueAsButton();
-        input.Character.Interaction.canceled -= ctx => inputConfigs.KeyPressedInteraction = ctx.ReadValueAsButton();
+        input.Character.Interaction.performed -= UpdateKeyPressedInteraction;
+        input.Character.Interaction.canceled -= UpdateKeyPressedInteraction;
 
-        input.Character.Reload.performed -= ctx => inputConfigs.KeyPressedReload = ctx.ReadValueAsButton();
-        input.Character.Reload.canceled -= ctx => inputConfigs.KeyPressedReload = ctx.ReadValueAsButton();
+        input.Character.Reload.performed -= UpdateKeyPressedReload;
+        input.Character.Reload.canceled -= UpdateKeyPressedReload;
         input.Disable();
     }
 

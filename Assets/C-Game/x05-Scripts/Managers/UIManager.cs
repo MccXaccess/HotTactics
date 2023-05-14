@@ -9,8 +9,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private BaseEventHandler EventHandler;
     private BaseCharacterControllerConfiguration characterConfigs;
 
-    private GunController gunController;
-
     private void Awake()
     {
         characterConfigs = EventHandler.CurrentCharacterConfigs;
@@ -26,19 +24,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _ammoTotal;
     [SerializeField] private TextMeshProUGUI _ammoMag;
 
-    public void UpdateCharcterGun(characterGun)
-    {
-        gunController = characterGun;
-    }
-    
-    public void Update()
+    public void UpdateValues(GameManager gameManager)
     {
         _statsHealth.fillAmount = characterConfigs.HealthCurrentAmount / characterConfigs.HealthMaximumAmount;
         _statsStamina.fillAmount = characterConfigs.StaminaCurrentAmount / characterConfigs.StaminaMaximumAmount;
         _statsShield.fillAmount = characterConfigs.ShieldCurrentAmount / characterConfigs.ShieldMaximumAmount;
 
-        _ammoTotal.text = "value";
-        _ammoMag.text = "value";
+        var weapon = gameManager.character.gameObject.GetComponent<WeaponController>();
+
+        _ammoTotal.text = weapon?.Gun?.GunMagCurrentAmmo.ToString();
+        _ammoMag.text = weapon?.Gun?.GunMagCurrentAmmo.ToString();
+    }
+
+    public void Update()
+    {
+
     }
 
     private void OnCharacterValueChanged(BaseCharacterControllerConfiguration value)
