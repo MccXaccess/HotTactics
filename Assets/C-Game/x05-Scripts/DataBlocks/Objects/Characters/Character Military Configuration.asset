@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0f7944047ad3fe55bea58a6aa018f59, type: 3}
+  m_Name: Character Military Configuration
+  m_EditorClassIdentifier: 
+  _walkSpeed: 38.1
+  _sprintSpeed: 17
+  _combatStanceSpeed: 7
+  _dashForce: 15
+  _dashMultiplier: 500
+  _dashTime: 0.2
+  _dashCooldownTime: 1
+  _knockbackForce: 5
+  _knockbackForceMultiplier: 10
+  _staminaIncreaseRate: 2.5
+  _staminaDecreaseRate: 5
+  _staminaMaximumAmount: 100
+  _staminaCurrentAmount: 100
+  _staminaRegenerateCooldownTime: 1
+  _shieldIncreaseRate: 3
+  _shieldMaximumAmount: 50
+  _shieldCurrentAmount: 50
+  _shieldRegenerationCooldownTime: 1.3
+  _healthIncreaseRate: 0
+  _healthMaximumAmount: 150
+  _healthCurrentAmount: 150
+  _healthRegenerationCooldownTime: 1
+  _recoilSprintMultiplier: 0.1
+  _recoilWalkMultiplier: 0.06
+  _recoilDashMultiplier: 0.1
+  _recoilIdleMultiplier: 0.1
+  _recoilCombatStanceMultiplier: 0.1
+  _recoilSprintMaximumClamp: 7
+  _recoilWalkMaximumClamp: 5
+  _recoilDashMaximumClamp: 7
+  _recoilIdleMaximumClamp: 1
+  _recoilCombatStanceMaximumClamp: 1.5
+  _recoilCurrent: 1.0199978
+  _gunMaximumAmmoCapacity: 10

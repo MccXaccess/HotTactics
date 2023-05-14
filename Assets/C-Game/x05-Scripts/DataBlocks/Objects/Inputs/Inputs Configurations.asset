@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6395c09d3a371eba5915566bc7e59b, type: 3}
+  m_Name: Inputs Configurations
+  m_EditorClassIdentifier: 
+  _controlsMovement: {fileID: 7787604572800715182, guid: 5f162f8e77a32a5c3857c00376b39d00, type: 3}
+  _controlsDash: {fileID: 3160550712754862946, guid: 5f162f8e77a32a5c3857c00376b39d00, type: 3}
+  _controlsSprint: {fileID: 6871686011944853441, guid: 5f162f8e77a32a5c3857c00376b39d00, type: 3}
+  _controlsCombatStance: {fileID: -3180641840366158633, guid: 5f162f8e77a32a5c3857c00376b39d00, type: 3}

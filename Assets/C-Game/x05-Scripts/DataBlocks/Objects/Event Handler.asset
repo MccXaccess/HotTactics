@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9d427d381768bd798ec327c92a61da1, type: 3}
+  m_Name: Event Handler
+  m_EditorClassIdentifier: 
+  currentCharacterConfigs: {fileID: 0}
+  currentInputConfigs: {fileID: 11400000, guid: c7162774b36aa3c96a592724aa5c2ad7, type: 2}
+  currentWeaponConfigs: {fileID: 11400000, guid: 4773cdc30d6965ebcbc03d2dad4ed3b8, type: 2}
+  IDs:
+  - {fileID: 11400000, guid: f52238ab24fb0065fbabb8e01db38444, type: 2}
+  - {fileID: 11400000, guid: 4baae5411d8337856a2ec62771f291c7, type: 2}
