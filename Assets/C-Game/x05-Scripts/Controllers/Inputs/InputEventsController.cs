@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+using static UnityEngine.InputSystem.InputAction;
 
 public class InputEventsController : MonoBehaviour
 {
@@ -8,6 +11,8 @@ public class InputEventsController : MonoBehaviour
     private BaseInputControllerConfiguration inputConfigs;
 
     private InputBindingsController input = null;
+
+    void UpdateKeyPressedSprint(CallbackContext ctx) => inputConfigs.KeyPressedSprint = ctx.ReadValueAsButton();
 
     private void OnEnable()
     {
@@ -34,7 +39,7 @@ public class InputEventsController : MonoBehaviour
         input.Enable();
     }
 
-    private void OnDisbale()
+    private void OnDisable()
     {
         input.Character.Movement.performed -= ctx => characterConfigs.MovementDirection = ctx.ReadValue<Vector2>();
         input.Character.Movement.canceled -= ctx => characterConfigs.MovementDirection = Vector2.zero;

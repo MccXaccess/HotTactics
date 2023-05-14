@@ -29,6 +29,8 @@ public class WeaponController : MonoBehaviour
 
     private Collider2D collision;
 
+    public GunController Gun => gun;
+
     private void Awake()
     {
         characterConfigs = EventHandler.CurrentCharacterConfigs;
@@ -99,8 +101,13 @@ public class WeaponController : MonoBehaviour
                 onReload?.Invoke(currentGunConfigs.GunReloadTime);
             }
 
-            _currentShootCooldownTime -= Time.fixedDeltaTime;
+            _currentShootCooldownTime -= Time.deltaTime;
         }
+    }
+
+    public void FixedUpdate()
+    {
+        
     }
 
     #region Event Listeners
@@ -115,28 +122,27 @@ public class WeaponController : MonoBehaviour
     }
 
     private void HandleReloadEvent(float duration)
-    {   
+    {
         inputConfigs.SetBoolean("KeyPressedReload", false);
         StartCoroutine(duration.SetCoroutineWait());
     }
 
     private void HandleShootEvent()
-    {   
-        if (_currentShootCooldownTime <= 0.0f && gun.GunMagCurrentAmmo > 0.0f)
-        {
-            // NOTE : USELESS PIECE OF CODE, FOR NOW...
-            Vector3 rotation = transform.GetRotationFromToCursor();
+    {
+        if (_currentShootCooldownTime > 0.0f || gun.GunMagCurrentAmmo <= 0.0f) return;
+        
+        // NOTE : USELESS PIECE OF CODE, FOR NOW...
+        Vector3 rotation = transform.GetRotationFromToCursor();
 
-            //moduleShoot.GunShoot(currentGunConfigs.GunBulletPrefab, gun.GunShootPoint.transform.position, gun.GunShootPoint.transform.rotation, currentGunConfigs.GunOffset, characterConfigs.RecoilCurrent, characterConfigs.GunShootAccuracy);
-            moduleShoot.GunShootModified(currentGunConfigs.GunBulletPrefab, gun.GunShootPoint.transform.position, this.transform, rotation, characterConfigs.RecoilCurrent, characterConfigs.GunShootAccuracy);
-            characterConfigs.RecoilCurrent = characterConfigs.RecoilCurrent < currentGunConfigs.RecoilMaximum ? characterConfigs.RecoilCurrent += currentGunConfigs.GunOnShootRecoilIncrease : characterConfigs.RecoilCurrent;
+        moduleShoot.GunShoot(currentGunConfigs.GunBulletPrefab, gun.GunShootPoint.transform.position, gun.GunShootPoint.transform.rotation, currentGunConfigs.GunOffset, characterConfigs.RecoilCurrent, characterConfigs.GunShootAccuracy);
+        //moduleShoot.GunShootModified(currentGunConfigs.GunBulletPrefab, gun.GunShootPoint.transform.position, this.transform, rotation, characterConfigs.RecoilCurrent, characterConfigs.GunShootAccuracy);
+        characterConfigs.RecoilCurrent = characterConfigs.RecoilCurrent < currentGunConfigs.RecoilMaximum ? characterConfigs.RecoilCurrent += currentGunConfigs.GunOnShootRecoilIncrease : characterConfigs.RecoilCurrent;
 
-            inputConfigs.KeyPressedShoot = currentGunConfigs.GunAutoEnabled;
+        inputConfigs.KeyPressedShoot = currentGunConfigs.GunAutoEnabled;
 
-            _currentShootCooldownTime = currentGunConfigs.GunShootCooldown;
+        _currentShootCooldownTime = currentGunConfigs.GunShootCooldown;
 
-            gun.GunMagCurrentAmmo -= 1;   
-        }
+        gun.GunMagCurrentAmmo -= 1;   
     }
 
     private void HandlePickupEvent()

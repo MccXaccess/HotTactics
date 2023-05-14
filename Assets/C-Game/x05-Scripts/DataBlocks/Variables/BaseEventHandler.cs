@@ -13,24 +13,22 @@ public class BaseEventHandler : ScriptableObject
 
     [SerializeField] private BaseCharacterControllerConfiguration[] IDs;
 
-
     public BaseCharacterControllerConfiguration CurrentCharacterConfigs
     {
-        get { return currentCharacterConfigs; }
+        get => currentCharacterConfigs;
 
         set 
         {
-            if (currentCharacterConfigs != value)
-            {
-                currentCharacterConfigs = value;
-                onCharacterSwitchedEvent.Invoke(value);
-            }
+            if (currentCharacterConfigs == value) return;
+
+            currentCharacterConfigs = value;
+            onCharacterSwitchedEvent.Invoke(value);
         }
     }
 
     public BaseInputControllerConfiguration CurrentInputConfigs
     {
-        get { return currentInputConfigs; }
+        get => currentInputConfigs;
 
         set 
         {
@@ -44,7 +42,7 @@ public class BaseEventHandler : ScriptableObject
 
     public BaseGunControllerConfiguration CurrentWeaponConfigs
     {
-        get { return currentWeaponConfigs; }
+        get => currentWeaponConfigs;
 
         set 
         {

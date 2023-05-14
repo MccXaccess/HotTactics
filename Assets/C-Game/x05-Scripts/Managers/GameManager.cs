@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public UIManager uimanager;
-    public CharacterController charcter;
+    public CharacterController character;
 
     // gun switched
     // call the update the ui managers stuff
@@ -15,6 +15,6 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        uimanager.UpdateCharcterGun(character);
+        uimanager.UpdateValues(this);
     }
 }
