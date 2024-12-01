@@ -14,7 +14,9 @@ public class ModuleInteraction : MonoBehaviour
 
         _positionOffset = offsetPosition;
 
-        currentWeapon.transform.localPosition = _positionOffset;
+        activeField.transform.localPosition = _positionOffset;
+
+        currentWeapon.transform.localPosition = Vector2.zero; //_positionOffset;
 
         currentWeapon.transform.rotation = new Quaternion(0,0,0,0);
 
@@ -26,6 +28,8 @@ public class ModuleInteraction : MonoBehaviour
         Transform parentTransform = activeField.transform;
 
         Transform firstChildTransform = parentTransform.GetChild(0);
+
+        activeField.transform.localPosition = Vector2.zero;
 
         parentTransform.DetachChildren();
 

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System;
+using MODULES_Z;
+using static UnityEngine.GraphicsBuffer;
 
 public class WeaponController : MonoBehaviour
 {
@@ -8,6 +10,10 @@ public class WeaponController : MonoBehaviour
     private BaseInputControllerConfiguration inputConfigs;
     private BaseGunControllerConfiguration currentGunConfigs;
 
+    private ModuleLookTowardsMouse moduleLookTowardsMouse = new();
+
+    [SerializeField] private AudioSource sfx;
+     
     public event Action<float> onReload;
     public event Action onShoot;
     public event Action onDrop;
@@ -56,6 +62,8 @@ public class WeaponController : MonoBehaviour
 
     private void Update()
     {
+
+
         if (_currentWeapon == null)
         {
             characterConfigs.SetBoolean("IsHoldingWeapon", false);
@@ -91,6 +99,18 @@ public class WeaponController : MonoBehaviour
 
         if (_currentWeapon != null)
         {
+            // Get the mouse position in world space
+            Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            // Set z = 0 to avoid any issues with 3D depth, as we're likely rotating a 2D object
+            mouseWorldPosition.z = 0;
+
+            // Get the angle to rotate the weapon towards the mouse
+            float angle = moduleLookTowardsMouse.ModuleLookTowards(mouseWorldPosition, _currentWeapon.transform.position);
+
+            // Apply the rotation to the weapon (assuming we're rotating in 2D)
+            _currentWeapon.transform.rotation = Quaternion.Euler(0, 0, angle);
+
             if (inputConfigs.KeyPressedShoot)
             {
                 onShoot?.Invoke();
@@ -123,6 +143,9 @@ public class WeaponController : MonoBehaviour
 
     private void HandleReloadEvent(float duration)
     {
+        sfx.clip = currentGunConfigs.GunReloadSound;
+        sfx.Play();
+
         inputConfigs.SetBoolean("KeyPressedReload", false);
         StartCoroutine(duration.SetCoroutineWait());
     }
@@ -130,13 +153,17 @@ public class WeaponController : MonoBehaviour
     private void HandleShootEvent()
     {
         if (_currentShootCooldownTime > 0.0f || gun.GunMagCurrentAmmo <= 0.0f) return;
-        
+
+        sfx.clip = currentGunConfigs.GunShootSound;
+        sfx.Play();
+
         // NOTE : USELESS PIECE OF CODE, FOR NOW...
-        Vector3 rotation = transform.GetRotationFromToCursor();
+        //Vector3 rotation = transform.GetRotationFromToCursor();
+
+        characterConfigs.RecoilCurrent = characterConfigs.RecoilCurrent < currentGunConfigs.RecoilMaximum ? characterConfigs.RecoilCurrent += currentGunConfigs.GunOnShootRecoilIncrease : characterConfigs.RecoilCurrent;
 
         moduleShoot.GunShoot(currentGunConfigs.GunBulletPrefab, gun.GunShootPoint.transform.position, gun.GunShootPoint.transform.rotation, currentGunConfigs.GunOffset, characterConfigs.RecoilCurrent, characterConfigs.GunShootAccuracy);
         //moduleShoot.GunShootModified(currentGunConfigs.GunBulletPrefab, gun.GunShootPoint.transform.position, this.transform, rotation, characterConfigs.RecoilCurrent, characterConfigs.GunShootAccuracy);
-        characterConfigs.RecoilCurrent = characterConfigs.RecoilCurrent < currentGunConfigs.RecoilMaximum ? characterConfigs.RecoilCurrent += currentGunConfigs.GunOnShootRecoilIncrease : characterConfigs.RecoilCurrent;
 
         inputConfigs.KeyPressedShoot = currentGunConfigs.GunAutoEnabled;
 

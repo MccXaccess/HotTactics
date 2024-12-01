@@ -11,6 +11,9 @@ public class BaseGunControllerConfiguration : ScriptableObject
 
     [SerializeField] private Vector3 _gunOffset;
 
+    [SerializeField] private AudioClip _gunShootSound;
+    [SerializeField] private AudioClip _gunReloadSound;
+
     [Header("Gun In Battle Action Mechanics Settings:")]
     [Range(0.0f, 25f)] [SerializeField] private float _gunReloadTime;
     [Range(0.0f, 25f)] [SerializeField] private float _gunShootCooldown;
@@ -26,7 +29,8 @@ public class BaseGunControllerConfiguration : ScriptableObject
 
     #region Base Mechanics
     public GameObject GunBulletPrefab { get => _gunBulletPrefab; set => _gunBulletPrefab = value; }
-
+    public AudioClip GunShootSound { get => _gunShootSound; set => _gunShootSound = value; }
+    public AudioClip GunReloadSound { get => _gunReloadSound; set => _gunReloadSound = value; }
     public bool GunAutoEnabled { get => _gunAutoEnabled; set => _gunAutoEnabled = value; }
     public bool GunAbleToShoot { get => _gunAbleToShoot; set => _gunAbleToShoot = value; }
 

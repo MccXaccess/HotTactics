@@ -43,8 +43,8 @@ MonoBehaviour:
   _recoilSprintMaximumClamp: 4.5
   _recoilWalkMaximumClamp: 2.5
   _recoilDashMaximumClamp: 6.5
-  _recoilIdleMaximumClamp: 0
+  _recoilIdleMaximumClamp: 1
   _recoilCombatStanceMaximumClamp: 1.5
-  _recoilCurrent: 0.06000962
+  _recoilCurrent: 5.499955
   _gunShootAccuracy: 1
-  _gunMaxInaccuracy: 1
+  _gunMaxInaccuracy: 100

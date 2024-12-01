@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 3505594834160941119}
   - component: {fileID: 3505594834160941121}
   - component: {fileID: 804510931}
+  - component: {fileID: 5795019067816374343}
   m_Layer: 17
   m_Name: Character-Default
   m_TagString: Player
@@ -372,7 +373,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EventHandler: {fileID: 11400000, guid: 6c6076c452462f21e9bd378d1899460b, type: 2}
-  characterID: 0
+  _characterID: 0
+  _characterKills: 0
 --- !u!114 &804510931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,10 +392,23 @@ MonoBehaviour:
   moduleShoot: {fileID: 1812634463}
   _activeField: {fileID: 4276659837683179002}
   _passiveField: {fileID: 1035162157655906435}
-  _interactionRadius: 3
   _layerMaskWeapon:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &5795019067816374343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3505594834160941128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1e95fc56a6e0a41b55ceae71a8079c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterConfiguration: {fileID: 11400000, guid: f52238ab24fb0065fbabb8e01db38444, type: 2}
+  instanceHealth: 0
 --- !u!1 &3505594834286006808
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,35 +573,6 @@ MonoBehaviour:
   m_ShadowIntensity: 0.75
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
-  m_Vertices:
-  - position: {x: 0.9985302, y: 0.9985302, z: 0}
-    color: {r: 0.70710677, g: 0.70710677, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: 0.9985302, y: 0.9985302, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.9985302, y: 0.9985302, z: 0}
-    color: {r: -0.70710677, g: 0.70710677, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.9985302, y: 0.9985302, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.99853003, y: -0.9985304, z: 0}
-    color: {r: -0.70710665, g: -0.7071069, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: -0.99853003, y: -0.9985304, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: 0.99853003, y: -0.9985304, z: 0}
-    color: {r: 0.70710665, g: -0.7071069, b: 0, a: 0}
-    uv: {x: 0, y: 0}
-  - position: {x: 0.99853003, y: -0.9985304, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  - position: {x: 0, y: 0, z: 0}
-    color: {r: 0, g: 0, b: 0, a: 1}
-    uv: {x: 0, y: 0}
-  m_Triangles: 030001000800020000000100030002000100050003000800040002000300050004000300070005000800060004000500070006000500010007000800000006000700010000000700
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}

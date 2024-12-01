@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b974a313ea115834e8be9718d94ce7ab, type: 3}
+  m_Name: Pistol Configurations 1
+  m_EditorClassIdentifier: 
+  _gunBulletPrefab: {fileID: 2160994592557002846, guid: 8053559498dfeb34891df419a51f1c71, type: 3}
+  _gunAutoEnabled: 0
+  _gunAbleToShoot: 0
+  _gunOffset: {x: -0.8, y: 0.6, z: 0}
+  _gunShootSound: {fileID: 8300000, guid: 804be5c426e2b9645b7d29956f68d42a, type: 3}
+  _gunReloadSound: {fileID: 8300000, guid: 34fcdb308689d8d48a4012f4fedd0477, type: 3}
+  _gunReloadTime: 1
+  _gunShootCooldown: 0.25
+  _gunOnShootRecoilIncrease: 2.4
+  _gunMagMaximumAmmo: 8
+  _recoilMaximum: 5.6
+  _recoilMinimum: 2.26
+  _recoilCooldownTime: 0

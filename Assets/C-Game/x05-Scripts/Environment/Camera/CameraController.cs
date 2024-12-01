@@ -12,7 +12,12 @@ public class CameraController : MonoBehaviour
     [Header("Base Options:")]
     [SerializeField] private float _maxLookoutDistance = 3f;
     [SerializeField] private float _followSpeed = 3f;
-    
+
+    // Переменные для тряски камеры
+    public bool isShaking = false;
+    private float shakeDuration = 0f;
+    private float shakeMagnitude = 0.4f;
+    private float dampingSpeed = 1.0f;
 
     private Vector3 _cursorVelocity = Vector3.zero;
     private GameObject _playerObject;
@@ -48,8 +53,38 @@ public class CameraController : MonoBehaviour
         // Move the target position based on the cursor direction and the clamped distance
         transform.position = _cursorTarget.position - cursorDirection * distance;
 
+        if (isShaking)
+        {
+            if (shakeDuration > 0)
+            {
+                // Генерация случайного смещения внутри сферы
+                Vector3 shakeOffset = Random.insideUnitSphere * shakeMagnitude;
+                shakeOffset.z = 0; // Избегаем смещения по оси Z
+                transform.position += shakeOffset;
+
+                shakeDuration -= Time.fixedDeltaTime * dampingSpeed;
+            }
+            else
+            {
+                isShaking = false;
+            }
+        }
+
         // Lerp the camera position to the target position
         transform.position = Vector3.Lerp(playerPosition, transform.position + offset, Time.fixedDeltaTime * _followSpeed);
+    }
+
+    // BY ARTEMIY THE FORGOTTEN ONE
+    /// <summary>
+    /// Метод для запуска тряски камеры.
+    /// </summary>
+    /// <param name="duration">Длительность тряски в секундах.</param>
+    /// <param name="magnitude">Интенсивность тряски.</param>
+    public void Shake(float duration, float magnitude)
+    {
+        shakeDuration = duration;
+        shakeMagnitude = magnitude;
+        isShaking = true;
     }
 
     private void OnValueChanged(BaseCharacterControllerConfiguration value)

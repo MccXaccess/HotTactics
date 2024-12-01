@@ -11,7 +11,6 @@ public class GunController : MonoBehaviour
     [SerializeField] private int _gunMagCurrentAmmo;
 
     public Transform GunShootPoint { get => _gunShootPoint; set => _gunShootPoint = value; }
-
     public int GunTotalAmmo { get => _gunTotalAmmo; set => _gunTotalAmmo = value; }
     public int GunMagCurrentAmmo { get => _gunMagCurrentAmmo; set => _gunMagCurrentAmmo = value; }
 }
